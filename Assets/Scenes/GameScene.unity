@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 90778794}
   - component: {fileID: 90778793}
   - component: {fileID: 90778792}
-  - component: {fileID: 90778791}
+  - component: {fileID: 90778795}
   m_Layer: 0
   m_Name: Microphone
   m_TagString: Untagged
@@ -239,22 +239,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &90778791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90778790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3dd4b9b6cc36e54d93b177fa10f383e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RmsValue: 0
-  DbValue: 0
-  PitchValue: 0
-  pitchText: {fileID: 2130172019}
 --- !u!114 &90778792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8d3d6f5ae0f9e4ca3e09e2f2df8d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minThreshold: 0.0001
+  minThreshold: 0
   frequency: 0
   audioSampleRate: 44100
   microphone: 
@@ -385,6 +369,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &90778795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90778790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892358b38b021d34eb5de469aa4f622c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rmsValue: 0
+  dbValue: 0
+  pitchValue: 0
+  qSamples: 1024
+  binSize: 1024
+  refValue: 0.1
+  threshold: 0.002
+  display: {fileID: 2130172019}
+  mute: 1
+  masterMixer: {fileID: 24100000, guid: a5745d48874bf794fb0a00034462db55, type: 2}
+  minPeaksForPitch: 5
+  isUsingMinPitch: 1
+  pitchRangeMin: 130.81
+  pitchRangeMax: 261.63
 --- !u!1 &158454070
 GameObject:
   m_ObjectHideFlags: 0

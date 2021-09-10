@@ -53,6 +53,7 @@ public class AudioMeasure : MonoBehaviour
 
             maxV = _spectrum[i];
             maxN = i; // maxN is the index of max
+            // Debug.Log(i + " " + GetPitch(maxN));  //|
         }
         float freqN = maxN; // pass the index to a float variable
         if (maxN > 0 && maxN < QSamples - 1)
@@ -60,9 +61,16 @@ public class AudioMeasure : MonoBehaviour
             var dL = _spectrum[maxN - 1] / _spectrum[maxN];
             var dR = _spectrum[maxN + 1] / _spectrum[maxN];
             freqN += 0.5f * (dR * dR - dL * dL);
+            // Debug.Log((maxN - 1) * (_fSample / 2) / QSamples + " " + maxN * (_fSample / 2) / QSamples + " " + (maxN + 1) * (_fSample / 2) / QSamples);  //|
         }
         PitchValue = freqN * (_fSample / 2) / QSamples; // convert index to frequency
 
         pitchText.text = $"Pitch: {Mathf.Round(PitchValue)} Hz";
+        if (PitchValue != 0)  //|
+        {
+            // Debug.Log("freqN: " + freqN);
+            // Debug.Log(Mathf.Round(PitchValue));
+            // Debug.Log("FF: " + GetComponent<MicrophoneInput>().GetFundamentalFrequency());
+        }
     }
 }
