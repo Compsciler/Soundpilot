@@ -66,8 +66,8 @@ public class PitchTracker : MonoBehaviour
     [SerializeField] int minPeaksForPitch = 5;  //|
     [SerializeField] bool isUsingMinPitch = false;
 
-    [SerializeField] float pitchRangeMin;
-    [SerializeField] float pitchRangeMax;
+    [SerializeField] internal float pitchRangeMin;
+    [SerializeField] internal float pitchRangeMax;
 
     void Start()
     {
@@ -82,7 +82,7 @@ public class PitchTracker : MonoBehaviour
         GetComponent<AudioSource>().Play();
 
         // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
-        masterMixer.SetFloat("masterVolume", -80f);
+        //| masterMixer.SetFloat("masterVolume", -80f);
     }
 
     void Update()
@@ -139,7 +139,7 @@ public class PitchTracker : MonoBehaviour
             if (isUsingMinPitch)
             {
                 pitchValue = GetMinPitchWithinRange();
-                Debug.Log(pitchValue);
+                // Debug.Log(pitchValue);
             }
             else
             {
