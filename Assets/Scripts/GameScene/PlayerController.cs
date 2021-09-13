@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
     }
     [SerializeField] FlightSpeedMethod flightSpeedMethod;
 
-    [SerializeField] float minY;
-    [SerializeField] float maxY;
+    [SerializeField] internal float minY;
+    [SerializeField] internal float maxY;
+    internal float heightT;
 
     private enum HeightInterpolationMethod
     {
@@ -58,12 +59,12 @@ public class PlayerController : MonoBehaviour
         }
         if (flightSpeedMethod == FlightSpeedMethod.Constant)
         {
-            float heightT = Mathf.InverseLerp(minY, maxY, transform.position.y);
-            if (t < heightT)
+            heightT = Mathf.Lerp(minY, maxY, t);
+            if (heightT < transform.position.y)
             {
                 transform.Translate(0, -speed * Time.deltaTime, 0);
             }
-            else if (t > heightT)
+            else if (heightT > transform.position.y)
             {
                 transform.Translate(0, speed * Time.deltaTime, 0);
             }
