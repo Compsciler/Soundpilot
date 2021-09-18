@@ -8,14 +8,17 @@ public class PlayerController : MonoBehaviour
     private float playerMinPitch;
     private float playerMaxPitch;
 
-    [SerializeField] float speed;
+    [SerializeField] float horizontalStartSpeed;
+    [SerializeField] float horizontalSpeedIncrementPerSecond;
+    private float horizontalSpeed;
+    [SerializeField] float verticalSpeed;
 
-    private enum FlightSpeedMethod
+    private enum VerticalSpeedMethod
     {
         Constant,
         Accelerating
     }
-    [SerializeField] FlightSpeedMethod flightSpeedMethod;
+    [SerializeField] VerticalSpeedMethod verticalSpeedMethod;
 
     [SerializeField] internal float minY;
     [SerializeField] internal float maxY;
@@ -36,13 +39,27 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] PitchTracker pitchTracker;
 
+    private Camera mainCamera;
+
     void Start()
     {
+        mainCamera = Camera.main;
         playerMinPitch = ExponentialInterpolation(pitchTracker.pitchRangeMin, pitchTracker.pitchRangeMax, pitchBufferMultiplier / 2);
         playerMaxPitch = ExponentialInterpolation(pitchTracker.pitchRangeMin, pitchTracker.pitchRangeMax, 1 - pitchBufferMultiplier / 2);
+
+        horizontalSpeed = horizontalStartSpeed;
     }
 
     void LateUpdate()
+    {
+        transform.Translate(horizontalSpeed * Time.deltaTime, 0, 0);
+        mainCamera.transform.Translate(horizontalSpeed * Time.deltaTime, 0, 0);
+        MoveVertically();
+
+        horizontalSpeed += horizontalSpeedIncrementPerSecond * Time.deltaTime;
+    }
+
+    public void MoveVertically()
     {
         if (pitchTracker.pitchValue == 0)
         {
@@ -57,16 +74,16 @@ public class PlayerController : MonoBehaviour
         {
             t = 0.5f;  // Implement later
         }
-        if (flightSpeedMethod == FlightSpeedMethod.Constant)
+        if (verticalSpeedMethod == VerticalSpeedMethod.Constant)
         {
             heightT = Mathf.Lerp(minY, maxY, t);
             if (heightT < transform.position.y)
             {
-                transform.Translate(0, -speed * Time.deltaTime, 0);
+                transform.Translate(0, -verticalSpeed * Time.deltaTime, 0);
             }
             else if (heightT > transform.position.y)
             {
-                transform.Translate(0, speed * Time.deltaTime, 0);
+                transform.Translate(0, verticalSpeed * Time.deltaTime, 0);
             }
         }
     }

@@ -29,17 +29,6 @@ public class PitchUI : MonoBehaviour
             RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, pitchIndicatorRect.position, mainCamera, out pitchIndicatorWorldPos);
             pitchIndicatorWorldPos = new Vector3(pitchIndicatorWorldPos.x, playerController.heightT, pitchIndicatorWorldPos.z);
             pitchIndicatorRect.anchoredPosition = WorldToCanvasRectPoint(pitchIndicatorWorldPos, canvasRect);
-            /*
-            float pitchIndicatorAnchoredPosX = pitchIndicatorRect.anchoredPosition.x;
-            Vector3 pitchIndicatorWorldPos = new Vector3(pitchIndicatorRect.position.x, playerController.heightT, pitchIndicatorRect.position.z);
-            // Debug.Log(pitchTrackerWorldPos);
-            pitchIndicatorRect.anchoredPosition = mainCamera.WorldToScreenPoint((Vector2)pitchIndicatorWorldPos);
-            float playerWorldHeightRange = playerController.maxY - playerController.minY;
-            Debug.Log(mainCamera.WorldToScreenPoint(new Vector3(0, playerWorldHeightRange, 0)).y);
-            float pitchIndicatorAnchoredPosY = pitchIndicatorRect.anchoredPosition.y * 2 - mainCamera.WorldToScreenPoint(new Vector3(0, playerWorldHeightRange, 0)).y;
-            pitchIndicatorRect.anchoredPosition = new Vector2(pitchIndicatorAnchoredPosX, pitchIndicatorAnchoredPosY);
-            Debug.Log(pitchIndicatorRect.anchoredPosition);
-            */
         }
     }
 
